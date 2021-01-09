@@ -1,12 +1,14 @@
 # number-guessing-games
-I'm a big believer that creating a number guessing game allows you to use a lot of the basic features of any given programming language: input, output, condition controlled loops, use of standard libraries (random), reading from and writing to files etc. Even better, playing them is a good ilustration of the power of binary search
+I'm a big believer that creating a number guessing game allows you to use a lot of the basic features of any given programming language: input, output, type casting, condition controlled loops, use of standard libraries (random), reading from and writing to files etc. Even better, playing them is a good ilustration of the power of binary search
 
 ### Do you know a more idiomatic way of doing something in one of the programming languages here? Pull requests are very welcome. Suggestions of what modificaitons I should make are also welcome but unless they are about the Python or Scala implementations I cannot guarantee that they will be acted upon.
 
 ## Languages
-* [Python](game.py)
-* [Scala](game.scala)
+* [Crystal](game.cr)
 * [C#](game.cs)
+* [Scala](game.scala)
+* [Python](game.py)
+
 ## Copyright
 Copyright © 2020  Rory Sharp All rights reserved.
 
