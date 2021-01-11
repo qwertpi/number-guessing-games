@@ -7,6 +7,7 @@ I'm a big believer that creating a number guessing game allows you to use a lot 
 * [Crystal](game.cr)
 * [C#](game.cs)
 * [Scala](game.scala)
+* [C](game.c)
 * [Python](game.py)
 
 ## Copyright
