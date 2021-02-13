@@ -3,7 +3,8 @@ I'm a big believer that creating a number guessing game allows you to use a lot 
 
 ### Do you know a more idiomatic way of doing something in one of the programming languages here? Pull requests are very welcome. Suggestions of what modificaitons I should make are also welcome but unless they are about the Python or Scala implementations I cannot guarantee that they will be acted upon.
 
-## Languages
+## Languages (most recently written first)
+* [Go](game.go)
 * [Crystal](game.cr)
 * [C#](game.cs)
 * [Scala](game.scala)
@@ -11,7 +12,7 @@ I'm a big believer that creating a number guessing game allows you to use a lot 
 * [Python](game.py)
 
 ## Copyright
-Copyright © 2020  Rory Sharp All rights reserved.
+Copyright © 2020-2021  Rory Sharp All rights reserved.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
