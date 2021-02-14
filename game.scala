@@ -1,62 +1,77 @@
 import io.StdIn.readLine
 import util.Random
-import scala.annotation.switch
+import scala.annotation.{switch, tailrec}
 import io.Source.fromFile
-import java.io.FileNotFoundException
 import java.io.{BufferedOutputStream}
 import java.nio.file.{Files, Paths}
 
 object Game extends App {
-	val mode: Int = readLine("""Mode 1: 0-50
+	@tailrec
+	def get_mode(): Int ={
+		val mode: Int = readLine("""Mode 1: 0-50
 Mode 2: 0-100
 Mode 3: 0-250
 Mode 4: 0-500
 Mode 5 0-2000
-1-5?""").toInt
-	var best_score = Int.MaxValue
-	var best_exists: Boolean = false
-	if ((mode >= 1) && (mode <= 5)){
-		val answer: Int = Random.nextInt((mode: @switch) match {case 1 => 51 case 2 => 101 case 3 => 251 case 4 => 501 case 5 => 2001})
-		try{
-			best_score = fromFile(s"$mode.txt").getLines.next().toInt
-			best_exists = true
+1-5?  """).toInt
+		if ((mode >= 1) && (mode <= 5)){
+			return mode
 		}
-		catch{
-			case _: FileNotFoundException => println("No one has played in this mode before...")
+		else {
+			get_mode()
 		}
+	}
+	def get_best_score(filename: String): Int ={
+		if (best_exists) {
+			val best_score = fromFile(filename).getLines.next().toInt
+			println(s"The score to beat is ${best_score}")
+			return best_score
+		}
+		else {
+			println("No one has played in this mode before...")
+			return Int.MaxValue
+		}
+	}
 
-		var num_guesses: Int = 1
-		var guess: Int = 0
+	val mode: Int = get_mode()
+	val filename: String = s"${mode}.txt"
+	val best_exists: Boolean = Files.exists(Paths.get(filename))
+
+	val answer: Int = Random.nextInt((mode: @switch) match {case 1 => 51 case 2 => 101 case 3 => 251 case 4 => 501 case 5 => 2001})
+	val best_score: Int = get_best_score(filename)
+
+	var num_guesses: Int = 0
+	var guess: Int = -1
+	
+	while (guess != answer) {
 		guess = readLine("Enter a guess  ").toInt
-		while (guess != answer){
-		  num_guesses += 1
-		  if (answer > guess){
-			  println("Too low!")
-		  }
-		  else{
-			  println("Too high!")
-		  }
-		  guess = readLine("Enter a guess  ").toInt
+		num_guesses += 1
+		if (answer > guess){
+			println("Too low!")
 		}
-		
-		println(s"It took you $num_guesses guesses to guess the correct answer")
-		if (best_exists){
-			if (num_guesses > best_score){println(s"You did not beat the best score of $best_score")}
-			else if (num_guesses == best_score){println(s"You equaled the best score of $best_score")}
-			else{
-				print(s"You beat the best score of $best_score")
-				val out1 = new BufferedOutputStream(Files.newOutputStream(Paths.get(s"$mode.txt")))
-				out1.write(num_guesses.toString.getBytes(), 0, num_guesses.toString.length) 
-				out1.close()
-			}
+		else if (answer < guess) {
+			println("Too high!")
 		}
-		else{
-		  val out1 = new BufferedOutputStream(Files.newOutputStream(Paths.get(s"$mode.txt")))
-		  out1.write(num_guesses.toString.getBytes(), 0, num_guesses.toString.length) 
-		  out1.close()
+	}
+
+	println(s"It took you $num_guesses guesses to guess the correct answer")
+	if (best_exists){
+		if (num_guesses > best_score) {
+			println(s"You did not beat the best score of $best_score")
+		}
+		else if (num_guesses == best_score) {
+			println(s"You equaled the best score of $best_score")
+		}
+		else {
+			println(s"You beat the best score of $best_score")
+			val out1 = new BufferedOutputStream(Files.newOutputStream(Paths.get(s"$mode.txt")))
+			out1.write(num_guesses.toString.getBytes(), 0, num_guesses.toString.length) 
+			out1.close()
 		}
 	}
 	else{
-		println("That mode does not exist")
+		val out1 = new BufferedOutputStream(Files.newOutputStream(Paths.get(s"$mode.txt")))
+		out1.write(num_guesses.toString.getBytes(), 0, num_guesses.toString.length) 
+		out1.close()
 	}
 }
