@@ -4,6 +4,7 @@ I'm a big believer that creating a number guessing game allows you to use a lot 
 ### Do you know a more idiomatic way of doing something in one of the programming languages here? Pull requests are very welcome. Suggestions of what modificaitons I should make are also welcome but unless they are about the Python or Scala implementations I cannot guarantee that they will be acted upon.
 
 ## Languages (most recently written first)
+* [Dart](game.dart)
 * [Go](game.go)
 * [Crystal](game.cr)
 * [C#](game.cs)
